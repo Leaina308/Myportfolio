@@ -1,0 +1,9 @@
+mon-portfolio/
+├── index.html          # Page principale
+├── styles.css          # Styles CSS
+├── script.js           # JavaScript
+├── send_email.php      # Traitement du formulaire
+└── assets/
+    ├── images/         # Votre photo de profil
+    │   └── profile.jpg
+    └── projects/       # Images des projets
