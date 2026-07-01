@@ -22,6 +22,60 @@
     <!-- Particules d'arrière-plan -->
     <div class="particles" id="particles"></div>
 
+    <!-- Navigation moderne - Cachée au départ, apparaît au scroll -->
+    <nav class="navbar hidden" id="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="#home" class="nav-logo">
+                    <span class="logo-icon"><i class="fas fa-code"></i></span>
+                    <span class="logo-text">TA<span class="logo-accent">.</span></span>
+                </a>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link active" data-section="home">
+                            <i class="fas fa-home"></i>
+                            <span>Accueil</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link" data-section="about">
+                            <i class="fas fa-user"></i>
+                            <span>À propos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#skills" class="nav-link" data-section="skills">
+                            <i class="fas fa-laptop-code"></i>
+                            <span>Compétences</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#projects" class="nav-link" data-section="projects">
+                            <i class="fas fa-rocket"></i>
+                            <span>Projets</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link" data-section="contact">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="nav-search" aria-label="Rechercher">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="hamburger" id="hamburger">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <!-- Header avec effet gradient animé -->
     <header class="header" id="home">
         <div class="header-bg">
@@ -91,64 +145,10 @@
             </div>
         </div>
         <div class="scroll-indicator">
-            <span>Défiler</span>
+            <span>Défiler pour découvrir</span>
             <i class="fas fa-chevron-down"></i>
         </div>
     </header>
-
-    <!-- Navigation moderne -->
-    <nav class="navbar" id="navbar">
-        <div class="container">
-            <div class="nav-content">
-                <a href="#home" class="nav-logo">
-                    <span class="logo-icon"><i class="fas fa-code"></i></span>
-                    <span class="logo-text">TA<span class="logo-accent">.</span></span>
-                </a>
-                <ul class="nav-menu" id="navMenu">
-                    <li class="nav-item">
-                        <a href="#home" class="nav-link active" data-section="home">
-                            <i class="fas fa-home"></i>
-                            <span>Accueil</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#about" class="nav-link" data-section="about">
-                            <i class="fas fa-user"></i>
-                            <span>À propos</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#skills" class="nav-link" data-section="skills">
-                            <i class="fas fa-laptop-code"></i>
-                            <span>Compétences</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#projects" class="nav-link" data-section="projects">
-                            <i class="fas fa-rocket"></i>
-                            <span>Projets</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#contact" class="nav-link" data-section="contact">
-                            <i class="fas fa-paper-plane"></i>
-                            <span>Contact</span>
-                        </a>
-                    </li>
-                </ul>
-                <div class="nav-actions">
-                    <button class="nav-search" aria-label="Rechercher">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    <div class="hamburger" id="hamburger">
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
 
     <!-- Section À propos -->
     <section class="section about" id="about">
@@ -629,7 +629,7 @@
                             <textarea id="message" name="message" placeholder="Décrivez votre projet ou posez-moi une question..." required></textarea>
                             <span class="form-error"></span>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block submit-btn">
                             <span class="btn-text">Envoyer le message</span>
                             <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
                             <span class="btn-loading"><i class="fas fa-spinner fa-spin"></i></span>

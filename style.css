@@ -572,16 +572,27 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     color: var(--white-color);
     opacity: 0.7;
     animation: bounce 2s infinite;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
 }
 
 .scroll-indicator span {
-    font-size: 12px;
+    font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.scroll-indicator i {
+    font-size: 20px;
 }
 
 @keyframes bounce {
@@ -589,10 +600,10 @@ ul {
         transform: translateX(-50%) translateY(0);
     }
     40% {
-        transform: translateX(-50%) translateY(-10px);
+        transform: translateX(-50%) translateY(-15px);
     }
     60% {
-        transform: translateX(-50%) translateY(-5px);
+        transform: translateX(-50%) translateY(-7px);
     }
 }
 
@@ -615,14 +626,41 @@ ul {
     width: 100%;
     z-index: var(--z-sticky);
     padding: 20px 0;
-    transition: var(--transition);
-}
-
-.navbar.scrolled {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     box-shadow: var(--shadow-md);
+}
+
+.navbar.visible {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    animation: slideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.navbar.scrolled {
     padding: 12px 0;
+}
+
+.navbar.hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .nav-content {
@@ -1888,6 +1926,11 @@ body.dark-mode {
     --dark-color: #f1f5f9;
     --gray-dark: #cbd5e1;
     --gray-color: #94a3b8;
+    --white-color: #0f172a;
+}
+
+body.dark-mode .navbar {
+    background: rgba(30, 27, 75, 0.95);
 }
 
 body.dark-mode .navbar.scrolled {
@@ -1897,7 +1940,8 @@ body.dark-mode .navbar.scrolled {
 body.dark-mode .skill-category,
 body.dark-mode .service-card,
 body.dark-mode .project-card,
-body.dark-mode .contact-form-wrapper {
+body.dark-mode .contact-form-wrapper,
+body.dark-mode .about {
     background: #1e1b4b;
 }
 
@@ -1922,5 +1966,13 @@ body.dark-mode .nav-search {
 
 body.dark-mode .tool-item,
 body.dark-mode .project-content {
+    background: #1e1b4b;
+}
+
+body.dark-mode .skills {
+    background: #0f172a;
+}
+
+body.dark-mode .projects {
     background: #1e1b4b;
 }

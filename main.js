@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initCounterAnimation();
     initProjectFilter();
     initSmoothScroll();
+    initNavbarVisibility();
+    initTypingEffect();
 });
 
 // ===== Particules Animées =====
@@ -59,21 +61,46 @@ function initThemeToggle() {
     });
 }
 
-// ===== Navigation =====
-function initNavbar() {
+// ===== Gestion de la visibilité de la navbar =====
+function initNavbarVisibility() {
     const navbar = document.getElementById('navbar');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const header = document.querySelector('.header');
     
-    // Navbar au scroll
+    if (!navbar || !header) return;
+    
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
+        const scrollPosition = window.scrollY;
+        const headerHeight = header.offsetHeight;
+        
+        // La navbar devient visible quand on a dépassé 80% du header
+        if (scrollPosition > headerHeight * 0.8) {
+            navbar.classList.add('visible');
+            navbar.classList.remove('hidden');
+        } else {
+            navbar.classList.remove('visible');
+            navbar.classList.add('hidden');
+        }
+        
+        // Ajouter l'effet scrolled quand on a complètement dépassé le header
+        if (scrollPosition > headerHeight) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
-        
+    });
+}
+
+// ===== Navigation =====
+function initNavbar() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    // Mise à jour du lien actif au scroll
+    window.addEventListener('scroll', function() {
         updateActiveNavLink();
     });
+    
+    // Initial check
+    updateActiveNavLink();
 }
 
 function updateActiveNavLink() {
@@ -229,6 +256,8 @@ function initMobileMenu() {
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
     
+    if (!hamburger || !navMenu) return;
+    
     hamburger.addEventListener('click', function() {
         this.classList.toggle('active');
         navMenu.classList.toggle('active');
@@ -331,6 +360,24 @@ function initSmoothScroll() {
             }
         });
     });
+    
+    // Ajouter le scroll au clic sur l'indicateur de défilement
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', function() {
+            const aboutSection = document.querySelector('#about');
+            if (aboutSection) {
+                const headerOffset = 80;
+                const elementPosition = aboutSection.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    }
 }
 
 // ===== Typing Effect =====
@@ -371,4 +418,43 @@ function initTypingEffect() {
     setTimeout(type, 1000);
 }
 
-initTypingEffect();
+// ===== Gestion du redimensionnement =====
+let resizeTimer;
+window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+        updateActiveNavLink();
+    }, 250);
+});
+
+// ===== Gestion du chargement des images =====
+window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
+});
+
+// ===== Détection du support des préférences de réduction de mouvement =====
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+if (prefersReducedMotion.matches) {
+    document.documentElement.style.setProperty('--transition-fast', '0ms');
+    document.documentElement.style.setProperty('--transition', '0ms');
+    document.documentElement.style.setProperty('--transition-slow', '0ms');
+}
+
+// ===== Gestion des erreurs globales =====
+window.addEventListener('error', function(e) {
+    console.error('Erreur détectée:', e.error);
+    // Ici vous pourriez ajouter un système de logging
+});
+
+// ===== Performance Observer =====
+if ('PerformanceObserver' in window) {
+    const observer = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+            if (entry.duration > 50) {
+                console.warn(`Tâche longue détectée: ${entry.duration}ms`);
+            }
+        }
+    });
+    
+    observer.observe({ entryTypes: ['longtask'] });
+}
